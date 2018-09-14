@@ -16,7 +16,7 @@ truncate -s 0 /etc/nginx/sites-available/digitalocean
 cat > /etc/nginx/sites-available/digitalocean<<'EOF'
 server {
     server_name default_server;
-    root /var/www/html/drupal; # <-- Your only path reference.
+    root /var/www/html/drupal; ## <-- Your only path reference.
 
     location = /favicon.ico {
         log_not_found off;
@@ -138,11 +138,10 @@ server {
 
 EOF
 
-
 sudo apt-get install php7.2-dom php7.2-gd php7.2-mysql
 cd /var/www/html
 wget https://ftp.drupal.org/files/projects/drupal-8.6.1.tar.gz
-tar xzvf drupal*
+tar -xzvf drupal*
 mkdir drupal
 mv -v drupal-8.6.1/*  drupal/
 mkdir /var/www/html/drupal/sites/default/files
