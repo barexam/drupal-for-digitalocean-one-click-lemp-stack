@@ -84,8 +84,8 @@ server {
     # release.
     location ~ '\.php$|^/update.php' {
         fastcgi_split_path_info ^(.+?\.php)(|/.*)$;
-        # Security note: If you're running a version of PHP older than the
-        # latest 5.3, you should have "cgi.fix_pathinfo = 0;" in php.ini.
+        # Security note: If you're running a version of PHP older than
+        # 5.3, you should have "cgi.fix_pathinfo = 0;" in php.ini.
         # See http://serverfault.com/q/627903/94922 for details.
         include fastcgi_params;
         # Block httpoxy attacks. See https://httpoxy.org/.
@@ -118,7 +118,7 @@ server {
         log_not_found off;
     }
 
-    #Phpmyadmin Configurations
+    # phpMyAdmin Config
     location /phpmyadmin {
            root /usr/share/;
            index index.php index.html index.htm;
@@ -152,13 +152,13 @@ sudo chown -R :www-data /var/www/html/drupal/*
 chmod -R 777  /var/www/html/drupal/sites/default/files
 chmod 664 /var/www/html/drupal/sites/default/settings.php
 
-#install phpmyadmin
+# Install phpMyAdmin
 wget https://files.phpmyadmin.net/phpMyAdmin/4.8.2/phpMyAdmin-4.8.2-all-languages.zip
 sudo apt-get install unzip
 unzip phpMyAdmin-4.8.2-all-languages.zip
 mv phpMyAdmin-4.8.2-all-languages /usr/share/phpmyadmin
 
-#install composer and Drush
+# Install Composer & Drush
 sudo apt-get install php7.2-mbstring php7.2-curl
 curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
 wget -O drush.phar https://github.com/drush-ops/drush-launcher/releases/download/0.6.0/drush.phar
