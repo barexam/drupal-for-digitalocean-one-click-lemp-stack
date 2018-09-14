@@ -18,7 +18,6 @@ server {
     server_name default_server;
     root /var/www/html/drupal; ## <-- Your only path reference.
 
-
     location = /favicon.ico {
         log_not_found off;
         access_log off;
