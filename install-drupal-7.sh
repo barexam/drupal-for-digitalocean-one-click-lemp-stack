@@ -91,7 +91,7 @@ server {
         log_not_found off;
     }
 
-    #Phpmyadmin Configurations
+    # phpMyAdmin Config
     location /phpmyadmin {
            root /usr/share/;
            index index.php index.html index.htm;
@@ -126,13 +126,13 @@ sudo chown -R :www-data /var/www/html/drupal/*
 chmod -R 777  /var/www/html/drupal/sites/default/files
 chmod 664 /var/www/html/drupal/sites/default/settings.php
 
-#install phpmyadmin
+# Install phpMyAdmin
 wget https://files.phpmyadmin.net/phpMyAdmin/4.8.2/phpMyAdmin-4.8.2-all-languages.zip
 sudo apt-get install unzip
 unzip phpMyAdmin-4.8.2-all-languages.zip
 mv phpMyAdmin-4.8.2-all-languages /usr/share/phpmyadmin
 
-#install composer and Drush
+# Install Composer & Drush
 curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
 wget -O drush.phar https://github.com/drush-ops/drush-launcher/releases/download/0.6.0/drush.phar
 chmod +x drush.phar
