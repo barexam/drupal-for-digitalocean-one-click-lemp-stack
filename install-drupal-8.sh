@@ -29,7 +29,7 @@ server {
         access_log off;
     }
 
-    # Very rarely should these ever be accessed outside of your lan
+    # These should rarely ever be accessed outside of your LAN
     location ~* \.(txt|log)$ {
         allow 192.168.0.0/16;
         deny all;
@@ -77,15 +77,15 @@ server {
     # blog/index.php/legacy-path to continue to route to Drupal nodes. If
     # you do not have any paths like that, then you might prefer to use a
     # laxer rule, such as:
-    #   location ~ \.php(/|$) {
+        # location ~ \.php(/|$) {
     # The laxer rule will continue to work if Drupal uses this new URL
     # pattern with front controllers other than update.php in a future
     # release.
     location ~ '\.php$|^/update.php' {
         fastcgi_split_path_info ^(.+?\.php)(|/.*)$;
-        # Security note: If you're running a version of PHP older than
-        # 5.3, you should have "cgi.fix_pathinfo = 0;" in php.ini.
-        # See http://serverfault.com/q/627903/94922 for details.
+        # Security note: If you're running a version of PHP older than the
+        # latest 5.3, you should have "cgi.fix_pathinfo = 0;" in php.ini.
+        # See https://serverfault.com/q/627903/94922 for details.
         include fastcgi_params;
         # Block httpoxy attacks. See https://httpoxy.org/.
         fastcgi_param HTTP_PROXY "";
@@ -117,7 +117,7 @@ server {
         log_not_found off;
     }
 
-    # phpMyAdmin Config
+    # phpMyAdmin Configurations
     location /phpmyadmin {
            root /usr/share/;
            index index.php index.html index.htm;
@@ -133,7 +133,7 @@ server {
                    root /usr/share/;
            }
     }
-    
+  
 }
 
 EOF
@@ -143,20 +143,20 @@ cd /var/www/html
 wget https://ftp.drupal.org/files/projects/drupal-8.6.1.tar.gz
 tar -xzvf drupal*
 mkdir drupal
-mv -v drupal-8.6.1/*  drupal/
+mv -v drupal-8.6.1/* drupal/
 mkdir /var/www/html/drupal/sites/default/files
 cp /var/www/html/drupal/sites/default/default.settings.php /var/www/html/drupal/sites/default/settings.php
 sudo chown -R :www-data /var/www/html/drupal/*
-chmod -R 777  /var/www/html/drupal/sites/default/files
+chmod -R 777 /var/www/html/drupal/sites/default/files
 chmod 664 /var/www/html/drupal/sites/default/settings.php
 
-# Install phpMyAdmin
-wget https://files.phpmyadmin.net/phpMyAdmin/4.8.2/phpMyAdmin-4.8.2-all-languages.zip
+# install phpMyAdmin
+wget https://files.phpmyadmin.net/phpMyAdmin/4.8.3/phpMyAdmin-4.8.3-all-languages.zip
 sudo apt-get install unzip
-unzip phpMyAdmin-4.8.2-all-languages.zip
-mv phpMyAdmin-4.8.2-all-languages /usr/share/phpmyadmin
+unzip phpMyAdmin-4.8.3-all-languages.zip
+mv phpMyAdmin-4.8.3-all-languages /usr/share/phpmyadmin
 
-# Install Composer & Drush
+# install Composer and Drush
 sudo apt-get install php7.2-mbstring php7.2-curl
 curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
 wget -O drush.phar https://github.com/drush-ops/drush-launcher/releases/download/0.6.0/drush.phar
