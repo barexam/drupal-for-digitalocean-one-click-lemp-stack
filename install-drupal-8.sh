@@ -1,13 +1,13 @@
 #!/bin/bash
-sudo apt-get purge php.*
+sudo apt purge php.*
 sudo rm -rf /etc/php
 
-sudo apt-get install software-properties-common
+sudo apt install software-properties-common
 sudo add-apt-repository ppa:ondrej/php
-sudo apt-get update
+sudo apt update
 
-sudo apt-get install php7.2
-sudo apt-get install php7.2-fpm
+sudo apt install php7.2
+sudo apt install php7.2-fpm
 
 sed -i -e 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' /etc/php/7.2/cli/php.ini
 sed -i -e 's/listen = \/run\/php\/php7.2-fpm.sock/listen = 127.0.0.1:9000/g' /etc/php/7.2/fpm/pool.d/www.conf
@@ -48,9 +48,9 @@ server {
         allow all;
     }
 
-    # Block access to "hidden" files and directories whose names begin with a
-    # period. This includes directories used by version control systems such
-    # as Subversion or Git to store control files.
+    # Block access to "hidden" files and directories whose names begin with a period. 
+    # This includes directories used by version control systems such as Subversion or 
+    # Git to store control files.
     location ~ (^|/)\. {
         return 403;
     }
@@ -76,8 +76,7 @@ server {
     # This allows legacy path aliases in the form of
     # blog/index.php/legacy-path to continue to route to Drupal nodes. If
     # you do not have any paths like that, then you might prefer to use a
-    # laxer rule, such as:
-        # location ~ \.php(/|$) {
+    # laxer rule, such as: location ~ \.php(/|$) {
     # The laxer rule will continue to work if Drupal uses this new URL
     # pattern with front controllers other than update.php in a future
     # release.
@@ -119,26 +118,26 @@ server {
 
     # phpMyAdmin Configurations
     location /phpmyadmin {
-           root /usr/share/;
-           index index.php index.html index.htm;
-           location ~ ^/phpmyadmin/(.+\.php)$ {
-                   try_files $uri =404;
-                   root /usr/share/;
-                   fastcgi_pass 127.0.0.1:9000;
-                   fastcgi_index index.php;
-                   fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-                   include /etc/nginx/fastcgi_params;
-           }
-           location ~* ^/phpmyadmin/(.+\.(jpg|jpeg|gif|css|png|js|ico|html|xml|txt))$ {
-                   root /usr/share/;
-           }
+        root /usr/share/;
+        index index.php index.html index.htm;
+        location ~ ^/phpmyadmin/(.+\.php)$ {
+            try_files $uri =404;
+            root /usr/share/;
+            fastcgi_pass 127.0.0.1:9000;
+            fastcgi_index index.php;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+            include /etc/nginx/fastcgi_params;
+        }
+        location ~* ^/phpmyadmin/(.+\.(jpg|jpeg|gif|css|png|js|ico|html|xml|txt))$ {
+            root /usr/share/;
+        }
     }
-  
+    
 }
 
 EOF
 
-sudo apt-get install php7.2-dom php7.2-gd php7.2-mysql
+sudo apt install php7.2-dom php7.2-gd php7.2-mysql
 cd /var/www/html
 wget https://ftp.drupal.org/files/projects/drupal-8.6.1.tar.gz
 tar -xzvf drupal*
@@ -150,14 +149,14 @@ sudo chown -R :www-data /var/www/html/drupal/*
 chmod -R 777 /var/www/html/drupal/sites/default/files
 chmod 664 /var/www/html/drupal/sites/default/settings.php
 
-# install phpMyAdmin
+# Install phpMyAdmin
 wget https://files.phpmyadmin.net/phpMyAdmin/4.8.3/phpMyAdmin-4.8.3-all-languages.zip
-sudo apt-get install unzip
+sudo apt install unzip
 unzip phpMyAdmin-4.8.3-all-languages.zip
 mv phpMyAdmin-4.8.3-all-languages /usr/share/phpmyadmin
 
-# install Composer and Drush
-sudo apt-get install php7.2-mbstring php7.2-curl
+# Install Composer and Drush
+sudo apt install php7.2-mbstring php7.2-curl
 curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
 wget -O drush.phar https://github.com/drush-ops/drush-launcher/releases/download/0.6.0/drush.phar
 chmod +x drush.phar
