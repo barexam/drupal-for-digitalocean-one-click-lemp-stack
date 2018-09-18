@@ -16,7 +16,7 @@ truncate -s 0 /etc/nginx/sites-available/digitalocean
 cat > /etc/nginx/sites-available/digitalocean<<'EOF'
 server {
     server_name default_server;
-    root /var/www/html/drupal; ## <-- Your only path reference.
+    root /var/www/html/drupal; # Our only path reference.
 
     location = /favicon.ico {
         log_not_found off;
