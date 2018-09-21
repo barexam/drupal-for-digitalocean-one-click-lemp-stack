@@ -98,7 +98,7 @@ server {
            location ~ ^/phpmyadmin/(.+\.php)$ {
                    try_files $uri =404;
                    root /usr/share/;
-                   fastcgi_pass unix:/var/run/php/php7.0-fpm.sock;
+                   fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
                    fastcgi_index index.php;
                    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
                    include /etc/nginx/fastcgi_params;
@@ -113,8 +113,7 @@ server {
 
 EOF
 
-
-sudo apt-get install php7.0-dom php7.0-gd php7.0-mbstring
+sudo apt-get install php7.2-dom php7.2-gd php7.2-mbstring
 cd /var/www/html
 wget https://ftp.drupal.org/files/projects/drupal-7.59.tar.gz
 tar xzvf drupal*
@@ -152,5 +151,5 @@ cat > composer.json<<'EOF'
 EOF
 composer install
 
-sudo service php7.0-fpm restart
+sudo service php7.2-fpm restart
 sudo service nginx restart
