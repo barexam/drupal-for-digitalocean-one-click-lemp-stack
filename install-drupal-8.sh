@@ -139,10 +139,10 @@ EOF
 
 sudo apt install php7.2-dom php7.2-gd php7.2-mysql
 cd /var/www/html
-wget https://ftp.drupal.org/files/projects/drupal-8.6.1.tar.gz
+wget https://ftp.drupal.org/files/projects/drupal-8.6.3.tar.gz
 tar -xzvf drupal*
 mkdir drupal
-mv -v drupal-8.6.1/* drupal/
+mv -v drupal-8.6.3/* drupal/
 mkdir /var/www/html/drupal/sites/default/files
 cp /var/www/html/drupal/sites/default/default.settings.php /var/www/html/drupal/sites/default/settings.php
 sudo chown -R :www-data /var/www/html/drupal/*
@@ -162,7 +162,7 @@ wget -O drush.phar https://github.com/drush-ops/drush-launcher/releases/download
 chmod +x drush.phar
 sudo mv drush.phar /usr/local/bin/drush
 cd drupal
-composer require drush/drush:8.*
+composer require drush/drush:9.*
 
 sudo service php7.2-fpm restart
 sudo service nginx restart
