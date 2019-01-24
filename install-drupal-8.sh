@@ -139,10 +139,10 @@ EOF
 
 sudo apt install php7.2-dom php7.2-gd php7.2-mysql
 cd /var/www/html
-sudo wget https://ftp.drupal.org/files/projects/drupal-8.6.3.tar.gz
+sudo wget https://ftp.drupal.org/files/projects/drupal-8.6.7.tar.gz
 sudo tar -xzvf drupal*
 sudo mkdir drupal
-mv -v drupal-8.6.3/* drupal/
+mv -v drupal-8.6.7/* drupal/
 sudo mkdir /var/www/html/drupal/sites/default/files
 sudo cp /var/www/html/drupal/sites/default/default.settings.php /var/www/html/drupal/sites/default/settings.php
 sudo chown -R :www-data /var/www/html/drupal/*
