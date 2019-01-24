@@ -9,11 +9,11 @@ sudo apt update
 sudo apt install php7.2
 sudo apt install php7.2-fpm
 
-sudo sed -i -e 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' /etc/php/7.2/cli/php.ini
-sudo sed -i -e 's/listen = \/run\/php\/php7.2-fpm.sock/listen = 127.0.0.1:9000/g' /etc/php/7.2/fpm/pool.d/www.conf
+sed -i -e 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' /etc/php/7.2/cli/php.ini
+sed -i -e 's/listen = \/run\/php\/php7.2-fpm.sock/listen = 127.0.0.1:9000/g' /etc/php/7.2/fpm/pool.d/www.conf
 
-sudo truncate -s 0 /etc/nginx/sites-available/digitalocean
-sudo cat > /etc/nginx/sites-available/digitalocean<<'EOF'
+truncate -s 0 /etc/nginx/sites-available/digitalocean
+cat > /etc/nginx/sites-available/digitalocean<<'EOF'
 server {
     server_name default_server;
     root /var/www/html/drupal; # Our only path reference.
@@ -139,30 +139,30 @@ EOF
 
 sudo apt install php7.2-dom php7.2-gd php7.2-mysql
 cd /var/www/html
-sudo wget https://ftp.drupal.org/files/projects/drupal-8.6.7.tar.gz
-sudo tar -xzvf drupal*
-sudo mkdir drupal
+wget https://ftp.drupal.org/files/projects/drupal-8.6.7.tar.gz
+tar -xzvf drupal*
+mkdir drupal
 mv -v drupal-8.6.7/* drupal/
-sudo mkdir /var/www/html/drupal/sites/default/files
-sudo cp /var/www/html/drupal/sites/default/default.settings.php /var/www/html/drupal/sites/default/settings.php
+mkdir /var/www/html/drupal/sites/default/files
+cp /var/www/html/drupal/sites/default/default.settings.php /var/www/html/drupal/sites/default/settings.php
 sudo chown -R :www-data /var/www/html/drupal/*
 sudo chmod -R 777 /var/www/html/drupal/sites/default/files
 sudo chmod 664 /var/www/html/drupal/sites/default/settings.php
 
 # Install phpMyAdmin
-sudo wget https://files.phpmyadmin.net/phpMyAdmin/4.8.3/phpMyAdmin-4.8.4-all-languages.zip
+wget https://files.phpmyadmin.net/phpMyAdmin/4.8.4/phpMyAdmin-4.8.4-all-languages.zip
 sudo apt install unzip
-sudo unzip phpMyAdmin-4.8.4-all-languages.zip
+unzip phpMyAdmin-4.8.4-all-languages.zip
 mv phpMyAdmin-4.8.4-all-languages /usr/share/phpmyadmin
 
 # Install Composer and Drush
 sudo apt install php7.2-mbstring php7.2-curl
-sudo curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
-sudo wget -O drush.phar https://github.com/drush-ops/drush-launcher/releases/download/0.6.0/drush.phar
+curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
+wget -O drush.phar https://github.com/drush-ops/drush-launcher/releases/download/0.6.0/drush.phar
 sudo chmod +x drush.phar
 sudo mv drush.phar /usr/local/bin/drush
 cd drupal
-sudo composer require drush/drush:9.*
+composer require drush/drush:9.*
 
 sudo service php7.2-fpm restart
 sudo service nginx restart
