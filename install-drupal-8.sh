@@ -150,10 +150,10 @@ sudo chmod -R 777 /var/www/html/drupal/sites/default/files
 sudo chmod 664 /var/www/html/drupal/sites/default/settings.php
 
 # Install phpMyAdmin
-sudo wget https://files.phpmyadmin.net/phpMyAdmin/4.8.3/phpMyAdmin-4.8.3-all-languages.zip
+sudo wget https://files.phpmyadmin.net/phpMyAdmin/4.8.3/phpMyAdmin-4.8.4-all-languages.zip
 sudo apt install unzip
-sudo unzip phpMyAdmin-4.8.3-all-languages.zip
-mv phpMyAdmin-4.8.3-all-languages /usr/share/phpmyadmin
+sudo unzip phpMyAdmin-4.8.4-all-languages.zip
+mv phpMyAdmin-4.8.4-all-languages /usr/share/phpmyadmin
 
 # Install Composer and Drush
 sudo apt install php7.2-mbstring php7.2-curl
