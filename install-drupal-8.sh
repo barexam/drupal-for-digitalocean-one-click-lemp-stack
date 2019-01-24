@@ -140,7 +140,7 @@ EOF
 sudo apt install php7.2-dom php7.2-gd php7.2-mysql
 cd /var/www/html
 wget https://ftp.drupal.org/files/projects/drupal-8.6.7.tar.gz
-tar -xzvf drupal*
+tar xzvf drupal*
 mkdir drupal
 mv -v drupal-8.6.7/* drupal/
 mkdir /var/www/html/drupal/sites/default/files
